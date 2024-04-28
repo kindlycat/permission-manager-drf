@@ -5,6 +5,7 @@ dist
 build
 htmlcov
 __pycache__
+coverage.xml
 
 !.gitignore
 !.github

@@ -37,15 +37,25 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install poetry
         uses: abatilo/actions-poetry@v2
+
       - name: Install the project dependencies
         run: poetry install --no-root
+
       - name: Install django
         run: poetry run pip install "Django${{ matrix.django-version }}"
+
       - name: Run tests
-        run: poetry run pytest
+        run: poetry run pytest --cov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
