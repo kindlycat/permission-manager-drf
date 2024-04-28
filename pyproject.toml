@@ -29,7 +29,6 @@ pytest = "^8.1.2"
 ruff = "^0.4.2"
 pytest-django = "^4.8.0"
 pytest-mock = "^3.14.0"
-tox = "^4.15.0"
 
 [build-system]
 requires = ["poetry-core"]
