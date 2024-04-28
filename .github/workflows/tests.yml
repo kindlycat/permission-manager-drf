@@ -46,4 +46,4 @@ jobs:
       - name: Install the project dependencies
         run: poetry install --no-root
       - name: Run tests
-        run: tox -e ${{ matrix.tox-env }}
+        run: poetry run tox -e ${{ matrix.tox-env }}
