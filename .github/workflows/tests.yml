@@ -1,10 +1,8 @@
 name: Tests
 
 on:
-  push:
-    tags-ignore:
-      - 'v*.*.*'
-  pull_request:
+  - push
+  - pull_request
 
 jobs:
   tests:
