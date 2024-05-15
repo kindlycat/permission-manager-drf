@@ -20,7 +20,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10"
 djangorestframework = "^3.15.1"
-permission-manager = "^0.3.0"
+permission-manager = "^0.4.1"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.24"

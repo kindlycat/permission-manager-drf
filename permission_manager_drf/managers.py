@@ -12,8 +12,10 @@ class DRFAliasMeta(type):
         return new_cls
 
     def decorate(cls) -> None:
-        cls.has_view_permission = alias('retrieve')(cls.has_view_permission)
-        cls.has_delete_permission = alias('destroy')(cls.has_delete_permission)
+        cls.has_view_permission = alias(['retrieve'])(cls.has_view_permission)
+        cls.has_delete_permission = alias(['destroy'])(
+            cls.has_delete_permission
+        )
 
 
 class DRFPermissionManagerMeta(BasePermissionMeta, DRFAliasMeta): ...
