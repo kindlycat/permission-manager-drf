@@ -3,6 +3,14 @@
 Use [permission_manager](https://github.com/kindlycat/permission-manager) for 
 django rest framework.
 
+Full documentation on [read the docs](https://permission-manager-drf.readthedocs.io/).
+
+## Install
+
+```bash
+pip install permission-manager-drf
+```
+
 ## Example
 ```python
 from django.db import models
