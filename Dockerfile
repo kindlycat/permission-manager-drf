@@ -16,7 +16,7 @@ ENV PYTHONPATH=$WORKDIR
 WORKDIR $WORKDIR
 
 RUN apt-get update \
-    && apt-get install -y curl
+    && apt-get install -y curl build-essential
 
 RUN curl -sSL https://install.python-poetry.org | python3 - \
     && ln -s ${POETRY_HOME}/bin/poetry /usr/bin/poetry

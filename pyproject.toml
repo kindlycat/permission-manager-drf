@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "permission-manager-drf"
-version = "0.1.0"
+version = "0.2.0"
 description = "A simple way to manage object permissions in drf."
 authors = ["Grigory Mishchenko <grishkokot@gmail.com>"]
 readme = "README.md"
@@ -30,6 +30,8 @@ ruff = "^0.4.2"
 pytest-django = "^4.8.0"
 pytest-mock = "^3.14.0"
 pytest-cov = "^5.0.0"
+sphinx = "^7.3.7"
+furo = "^2024.4.27"
 
 [build-system]
 requires = ["poetry-core"]
@@ -63,6 +65,7 @@ exclude = [
     "node_modules",
     "site-packages",
     "venv",
+    "docs",
 ]
 
 line-length = 79
