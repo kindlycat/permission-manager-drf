@@ -85,7 +85,7 @@ fixable = ["ALL"]
 unfixable = []
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101", "S106", "RUF012", "D105"]
+"tests/*" = ["S101", "S106", "RUF012", "D105", "INP001"]
 
 [tool.ruff.lint.isort]
 section-order = [
