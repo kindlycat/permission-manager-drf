@@ -171,3 +171,11 @@ def test_custom_non_detail_negative(user_client):
     response = user_client.get(path='/model/custom_non_detail/')
 
     assert response.status_code == status.HTTP_403_FORBIDDEN
+
+
+@pytest.mark.django_db()
+def test_view_without_action_negative(admin_client):
+    instance = TestModel.objects.create(title='Test')
+
+    response = admin_client.patch(path=f'/model/{instance.pk}/without_action/')
+    assert response.status_code == status.HTTP_200_OK

@@ -107,5 +107,8 @@ line-ending = "auto"
 convention = "google"
 
 [tool.pytest.ini_options]
+addopts = '-v'
 testpaths = ["tests"]
-addopts = "-ra -s"
+
+[tool.coverage.run]
+source = ["permission_manager_drf"]

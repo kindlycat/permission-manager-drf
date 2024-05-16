@@ -54,3 +54,9 @@ class TestModelViewSet(ModelViewSet):
         instance.status = TestModelStatus.PUBLISHED
         instance.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=True, methods=['patch'])
+    def without_action(self, request, **kwargs):
+        self.action = None
+        self.get_object()
+        return Response(status=status.HTTP_200_OK)

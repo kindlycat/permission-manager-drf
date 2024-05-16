@@ -1,5 +1,7 @@
 import pytest
+from rest_framework import serializers
 
+from permission_manager_drf import PermissionField
 from tests.app.models import TestModel, TestModelStatus
 
 
@@ -55,3 +57,15 @@ def test_permission_field_by_user(user_client):
             },
         },
     }
+
+
+@pytest.mark.django_db()
+def test_permission_field_without_view_request_negative():
+    instance = TestModel.objects.create(title='Test')
+
+    class TestSerializer(serializers.Serializer):
+        id = serializers.IntegerField()
+        permissions = PermissionField(actions=['update'])
+
+    data = TestSerializer(instance=instance).data
+    assert data == {'id': instance.pk}
