@@ -1,5 +1,8 @@
 # Permission Manager for django rest framework
 
+![example workflow](https://github.com/kindlycat/permission-manager-drf/actions/workflows/tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/kindlycat/permission-manager-drf/graph/badge.svg?token=5XAFJZS6A8)](https://codecov.io/gh/kindlycat/permission-manager-drf)
+
 Use [permission_manager](https://github.com/kindlycat/permission-manager) for 
 django rest framework.
 
