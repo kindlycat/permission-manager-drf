@@ -604,13 +604,13 @@ testing = ["docopt", "pytest"]
 
 [[package]]
 name = "permission-manager"
-version = "0.4.1"
+version = "0.4.2"
 description = "A simple way to manage object permissions."
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "permission_manager-0.4.1-py3-none-any.whl", hash = "sha256:65050326a005980e69d3a83f7747cad0231d69160789d3ac01ec57fabe804599"},
-    {file = "permission_manager-0.4.1.tar.gz", hash = "sha256:4bf9ba123aff79b4bcc595c53da2e9207068bc1a7521a4d2570ef2d14ae6a46b"},
+    {file = "permission_manager-0.4.2-py3-none-any.whl", hash = "sha256:960ebd44edfe798e01e41b4f3bd90b4660a2354ea2c2cf47c07abb2084eabf81"},
+    {file = "permission_manager-0.4.2.tar.gz", hash = "sha256:646207dd98d382dfd992be02deddafebba693779dec9934cc2b0ff30ba79c42c"},
 ]
 
 [[package]]
@@ -1109,4 +1109,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "442172c0c2dee94c4151440f7fc68b466d9cd1f5905ac93f0caaf7647ff9f9ac"
+content-hash = "89f6152f549540cdce2c9d7ed126a254e9a2829c88415bac98c0a3aa91a25f23"
