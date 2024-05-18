@@ -20,7 +20,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10"
 djangorestframework = "^3.15.1"
-permission-manager = "^0.4.1"
+permission-manager = "^0.4.2"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.24"
@@ -108,7 +108,7 @@ convention = "google"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra -s -v"
+addopts = "-ra -v"
 
 [tool.coverage.run]
 source = ["permission_manager_drf"]

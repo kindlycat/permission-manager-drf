@@ -1,19 +1,28 @@
 from django.core.exceptions import ImproperlyConfigured
+from django.db.models import Model
 from permission_manager import BasePermissionManager
+from rest_framework.viewsets import GenericViewSet
 
 
 def get_permission_manager(
     *,
-    view,
-    instance=None,
+    view: GenericViewSet,
+    instance: Model = None,
     cache: bool = False,
 ) -> BasePermissionManager:
     """Get a permission manager instance from a view.
 
-    :param view: drf view
-    :param instance: model instance
-    :param cache: set permission manager cache
-    :return: permission_manager instance.
+    Args:
+        view: The DRF view from which to get the permission manager.
+        instance: The model instance (optional).
+        cache (bool): Whether to enable caching in the permission manager.
+
+    Returns:
+        BasePermissionManager: An instance of the permission manager.
+
+    Raises:
+        ImproperlyConfigured: If the view does not have a way to determine
+            the permission manager.
     """
     if view_manager_class := getattr(view, 'get_permission_manager', None):
         manager_class = view_manager_class()
@@ -40,11 +49,15 @@ def get_permission_manager(
 
 
 def get_permission_manager_class_for_model(
-    model,
+    model: Model,
 ) -> type[BasePermissionManager]:
-    """Get a permission manager class from a model.
+    """Get a permission manager class for a given model.
 
-    :param model: django model
-    :return: permission manager class.
+    Args:
+        model: The Django model for which to get the permission manager class.
+
+    Returns:
+        type[BasePermissionManager]: The permission manager class associated
+            with the model.
     """
     return model.permission_manager
