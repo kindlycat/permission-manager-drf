@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "permission-manager-drf"
-version = "0.2.1"
+version = "0.2.2"
 description = "A simple way to manage object permissions in drf."
 authors = ["Grigory Mishchenko <grishkokot@gmail.com>"]
 readme = "README.md"
@@ -112,3 +112,8 @@ addopts = "-ra -v"
 
 [tool.coverage.run]
 source = ["permission_manager_drf"]
+
+[tool.coverage.report]
+exclude_also = [
+    "if TYPE_CHECKING:",
+]
