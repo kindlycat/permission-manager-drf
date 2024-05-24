@@ -1,3 +1,4 @@
+from contextlib import suppress
 from typing import TYPE_CHECKING
 
 from django.core.exceptions import ImproperlyConfigured
@@ -6,6 +7,7 @@ from django.core.exceptions import ImproperlyConfigured
 if TYPE_CHECKING:
     from django.db.models import Model
     from permission_manager import BasePermissionManager
+    from permission_manager.types import ResolveWithMessageResult
     from rest_framework.viewsets import GenericViewSet
 
 
@@ -73,3 +75,32 @@ def get_permission_manager_class_for_model(
             with the model.
     """
     return model.permission_manager
+
+
+def get_list_permissions(
+    view: 'GenericViewSet',
+) -> list['ResolveWithMessageResult'] | None:
+    """Get list permissions for a view.
+
+    This function retrieves the permission manager for the given view and
+    resolves the permissions for the specified actions, including messages
+    if applicable.
+
+    Args:
+        view (GenericViewSet): The view for which to get the list permissions.
+
+    Returns:
+        list[ResolveWithMessageResult] | None: A list of resolved permissions
+            with messages, or None if there was an error in getting the
+            permission manager or resolving the permissions.
+    """
+    with suppress(ImproperlyConfigured, AttributeError, TypeError):
+        manager = get_permission_manager(view=view, cache=True)
+        actions = getattr(
+            view,
+            'permission_manager_list_actions',
+            ['create'],
+        )
+
+        if manager and actions:
+            return manager.resolve(actions=actions, with_messages=True)

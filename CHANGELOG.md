@@ -1,8 +1,9 @@
 # Changelog
 
 ### 0.2.2
+- Add `get_list_permissions` function
 - Don't raise an exception in the paginator if there is no permission manager
-- Fix context in get_permission_manager
+- Fix context in `get_permission_manager`
 - Fix imports
 
 ### 0.2.1

@@ -78,7 +78,7 @@ select = ["ALL"]
 ignore = [
     "D100", "D101", "ANN101", "D102", "EXE001", "D107", "ANN003", "ANN001",
     "ARG002", "ANN002", "D103", "D106", "D104", "ANN201", "COM812", "ISC001",
-    "ANN401", "ANN102", "TRY003", "EM102", "EM101"
+    "ANN401", "ANN102", "TRY003", "EM102", "EM101", "RET503"
 ]
 
 fixable = ["ALL"]
