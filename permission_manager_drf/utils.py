@@ -1,15 +1,20 @@
+from typing import TYPE_CHECKING
+
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import Model
-from permission_manager import BasePermissionManager
-from rest_framework.viewsets import GenericViewSet
+
+
+if TYPE_CHECKING:
+    from django.db.models import Model
+    from permission_manager import BasePermissionManager
+    from rest_framework.viewsets import GenericViewSet
 
 
 def get_permission_manager(
     *,
-    view: GenericViewSet,
-    instance: Model = None,
+    view: 'GenericViewSet',
+    instance: 'Model' = None,
     cache: bool = False,
-) -> BasePermissionManager:
+) -> 'BasePermissionManager':
     """Get a permission manager instance from a view.
 
     Args:
@@ -40,17 +45,22 @@ def get_permission_manager(
         )
         raise ImproperlyConfigured(msg)
 
+    try:
+        context = view.get_permission_manager_context()
+    except AttributeError:
+        context = {}
+
     return manager_class(
         user=view.request.user,
         instance=instance,
         cache=cache,
-        **getattr(view, 'get_permission_manager_context', {}),
+        **context,
     )
 
 
 def get_permission_manager_class_for_model(
-    model: Model,
-) -> type[BasePermissionManager]:
+    model: 'Model',
+) -> type['BasePermissionManager']:
     """Get a permission manager class for a given model.
 
     Args:
