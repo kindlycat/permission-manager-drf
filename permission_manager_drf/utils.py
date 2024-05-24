@@ -29,6 +29,7 @@ def get_permission_manager(
         ImproperlyConfigured: If the view does not have a way to determine
             the permission manager.
     """
+    manager_class = None
     if view_manager_class := getattr(view, 'get_permission_manager', None):
         manager_class = view_manager_class()
     elif view_manager_class := getattr(view, 'permission_manager', None):
@@ -37,7 +38,8 @@ def get_permission_manager(
         manager_class = get_permission_manager_class_for_model(queryset.model)
     elif model := getattr(view, 'model', None):
         manager_class = get_permission_manager_class_for_model(model)
-    else:
+
+    if not manager_class:
         msg = (
             "You must define the 'get_permission_manager' method, "
             "or the 'permission_manager' attribute, or the 'model' "

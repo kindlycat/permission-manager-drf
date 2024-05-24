@@ -1,3 +1,7 @@
+from contextlib import suppress
+
+from django.core.exceptions import ImproperlyConfigured
+
 from permission_manager_drf.utils import get_permission_manager
 
 
@@ -39,15 +43,17 @@ class PermissionManagerPaginationMixin:
         """
         result = super().get_paginated_response(data)
 
-        manager = get_permission_manager(view=self.view, cache=True)
-        actions = getattr(
-            self.view,
-            'permission_manager_list_actions',
-            ['create'],
-        )
-        if manager and actions:
-            result.data['permissions'] = manager.resolve(
-                actions=actions, with_messages=True
+        with suppress(ImproperlyConfigured, AttributeError, TypeError):
+            manager = get_permission_manager(view=self.view, cache=True)
+            actions = getattr(
+                self.view,
+                'permission_manager_list_actions',
+                ['create'],
             )
+
+            if manager and actions:
+                result.data['permissions'] = manager.resolve(
+                    actions=actions, with_messages=True
+                )
 
         return result
