@@ -37,7 +37,7 @@ class ManagerPermission(BasePermission):
         if action_name in self.default_detail_actions:
             return True
 
-        action = getattr(view, action_name)
+        action = getattr(view, action_name, None)
         return getattr(action, 'detail', False)
 
     def _has_perm(self, view: 'GenericViewSet', obj: 'Model' = None) -> bool:
