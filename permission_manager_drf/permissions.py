@@ -1,11 +1,14 @@
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
-from django.db.models import Model
 from rest_framework.permissions import BasePermission
-from rest_framework.request import Request
-from rest_framework.viewsets import GenericViewSet
 
 from permission_manager_drf.utils import get_permission_manager
+
+
+if TYPE_CHECKING:
+    from django.db.models import Model
+    from rest_framework.request import Request
+    from rest_framework.viewsets import GenericViewSet
 
 
 class ManagerPermission(BasePermission):
@@ -21,7 +24,7 @@ class ManagerPermission(BasePermission):
 
     default_detail_actions: ClassVar[tuple] = ('retrieve', 'destroy', 'update')
 
-    def is_detail(self, view: GenericViewSet, action_name: str) -> bool:
+    def is_detail(self, view: 'GenericViewSet', action_name: str) -> bool:
         """Check if the action is a detail action.
 
         Args:
@@ -34,10 +37,10 @@ class ManagerPermission(BasePermission):
         if action_name in self.default_detail_actions:
             return True
 
-        action = getattr(view, action_name)
+        action = getattr(view, action_name, None)
         return getattr(action, 'detail', False)
 
-    def _has_perm(self, view: GenericViewSet, obj: Model = None) -> bool:
+    def _has_perm(self, view: 'GenericViewSet', obj: 'Model' = None) -> bool:
         """Check if the permission is granted for the action.
 
         Args:
@@ -63,7 +66,11 @@ class ManagerPermission(BasePermission):
         manager = get_permission_manager(view=view, instance=obj)
         return manager.has_permission(action_name)
 
-    def has_permission(self, request: Request, view: GenericViewSet) -> bool:
+    def has_permission(
+        self,
+        request: 'Request',
+        view: 'GenericViewSet',
+    ) -> bool:
         """Check if the request has permission to access the view.
 
         Args:
@@ -77,9 +84,9 @@ class ManagerPermission(BasePermission):
 
     def has_object_permission(
         self,
-        request: Request,
-        view: GenericViewSet,
-        obj: Model,
+        request: 'Request',
+        view: 'GenericViewSet',
+        obj: 'Model',
     ) -> bool:
         """Check if the request has permission to access the object.
 

@@ -3,6 +3,7 @@ from unittest.mock import PropertyMock
 import pytest
 from rest_framework import status
 
+from tests.app.models import TestModel
 from tests.app.views import TestModelViewSet
 
 
@@ -69,3 +70,24 @@ def test_custom_list_actions(
 
     assert response.status_code == status.HTTP_200_OK
     assert data['permissions'] == expected_permissions
+
+
+@pytest.mark.django_db()
+def test_pagination_without_permission_manager(user_client, mocker):
+    mocker.patch.object(
+        TestModel,
+        attribute='permission_manager',
+        new_callable=PropertyMock,
+        return_value=None,
+    )
+    mocker.patch.object(
+        TestModelViewSet,
+        attribute='permission_classes',
+        new_callable=PropertyMock,
+        return_value=[],
+    )
+    response = user_client.get(path='/model/')
+    data = response.json()
+
+    assert response.status_code == status.HTTP_200_OK
+    assert 'permissions' not in data

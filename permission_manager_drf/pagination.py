@@ -1,4 +1,6 @@
-from permission_manager_drf.utils import get_permission_manager
+from permission_manager_drf.utils import (
+    get_list_permissions,
+)
 
 
 class PermissionManagerPaginationMixin:
@@ -39,15 +41,7 @@ class PermissionManagerPaginationMixin:
         """
         result = super().get_paginated_response(data)
 
-        manager = get_permission_manager(view=self.view, cache=True)
-        actions = getattr(
-            self.view,
-            'permission_manager_list_actions',
-            ['create'],
-        )
-        if manager and actions:
-            result.data['permissions'] = manager.resolve(
-                actions=actions, with_messages=True
-            )
+        if permissions := get_list_permissions(self.view):
+            result.data['permissions'] = permissions
 
         return result

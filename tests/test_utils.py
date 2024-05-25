@@ -177,6 +177,27 @@ def test_get_permission_manager_multiple_attributes(attributes, expected_key):
             case 'model' if v:
                 View.model = Model(permission_manager=v)
     assert isinstance(
-        get_permission_manager(view=View),
+        get_permission_manager(view=View()),
         attributes[expected_key],
     )
+
+
+def test_get_permission_manager_with_context():
+    context = {
+        'a': 1,
+        'b': 'test',
+    }
+
+    class Request(NamedTuple):
+        user = None
+
+    class View:
+        request = Request()
+        permission_manager = TestModelPermissionManager
+
+        def get_permission_manager_context(self) -> dict:
+            return context
+
+    permission_manager = get_permission_manager(view=View())
+
+    assert permission_manager.context == context
