@@ -8,20 +8,11 @@ from tests.app.views import TestModelViewSet
 
 
 @pytest.mark.django_db()
-@pytest.mark.parametrize(
-    ('client_name', 'expected_permissions'),
-    [
-        ('admin_client', {'create': {'allow': True, 'messages': None}}),
-        ('user_client', {'create': {'allow': False, 'messages': None}}),
-    ],
-)
-def test_default_list_actions(request, client_name, expected_permissions):
-    client = request.getfixturevalue(client_name)
-    response = client.get(path='/model/')
-    data = response.json()
+def test_default_list_actions(admin_client):
+    response = admin_client.get(path='/model/')
 
     assert response.status_code == status.HTTP_200_OK
-    assert data['permissions'] == expected_permissions
+    assert 'permissions' not in response.json()
 
 
 @pytest.mark.django_db()

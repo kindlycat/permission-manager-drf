@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "permission-manager-drf"
-version = "0.2.2"
+version = "0.3.0"
 description = "A simple way to manage object permissions in drf."
 authors = ["Grigory Mishchenko <grishkokot@gmail.com>"]
 readme = "README.md"
@@ -20,7 +20,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10"
 djangorestframework = "^3.14.0"
-permission-manager = "^0.4.2"
+permission-manager = "^0.5.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.24"

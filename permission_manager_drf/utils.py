@@ -96,11 +96,7 @@ def get_list_permissions(
     """
     with suppress(ImproperlyConfigured, AttributeError, TypeError):
         manager = get_permission_manager(view=view, cache=True)
-        actions = getattr(
-            view,
-            'permission_manager_list_actions',
-            ['create'],
-        )
+        actions = getattr(view, 'permission_manager_list_actions', None)
 
         if manager and actions:
             return manager.resolve(actions=actions, with_messages=True)

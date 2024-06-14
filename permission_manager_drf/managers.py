@@ -26,10 +26,8 @@ class DRFAliasMeta(type):
         This method adds aliases for 'retrieve' to `has_view_permission` and
         for 'destroy' to `has_delete_permission`.
         """
-        cls.has_view_permission = alias(['retrieve'])(cls.has_view_permission)
-        cls.has_delete_permission = alias(['destroy'])(
-            cls.has_delete_permission
-        )
+        cls.has_view_permission = alias('retrieve')(cls.has_view_permission)
+        cls.has_delete_permission = alias('destroy')(cls.has_delete_permission)
 
 
 class DRFPermissionManagerMeta(BasePermissionMeta, DRFAliasMeta):
