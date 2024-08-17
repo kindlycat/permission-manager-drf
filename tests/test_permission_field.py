@@ -5,7 +5,7 @@ from permission_manager_drf import PermissionField
 from tests.app.models import TestModel, TestModelStatus
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_permission_field_by_admin(admin_client):
     instance = TestModel.objects.create(
         title='Test',
@@ -32,7 +32,7 @@ def test_permission_field_by_admin(admin_client):
     }
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_permission_field_by_user(user_client):
     instance = TestModel.objects.create(
         title='Test',
@@ -59,7 +59,7 @@ def test_permission_field_by_user(user_client):
     }
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_permission_field_without_view_request_negative():
     instance = TestModel.objects.create(title='Test')
 

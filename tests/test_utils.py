@@ -21,7 +21,7 @@ def custom_permission_manager_drf_for_model_getter(model):
     return model.test_permission_manager
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_get_permission_manager_class_for_model():
     assert (
         permission_manager_drf.settings.permission_manager_getter(TestModel)
@@ -29,7 +29,7 @@ def test_get_permission_manager_class_for_model():
     )
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @override_settings(
     PERMISSION_MANAGER_DRF_FOR_MODEL_GETTER=(
         'tests.test_utils.custom_permission_manager_drf_for_model_getter'
@@ -44,7 +44,7 @@ def test_custom_get_permission_manager_class_for_model():
     )
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize(
     'attributes',
     [
@@ -89,7 +89,7 @@ def test_get_permission_manager_positive(attributes):
     )
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_get_permission_manager_negative():
     class Request(NamedTuple):
         user = None
@@ -101,7 +101,7 @@ def test_get_permission_manager_negative():
         get_permission_manager(view=View)
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize(
     ('attributes', 'expected_key'),
     [

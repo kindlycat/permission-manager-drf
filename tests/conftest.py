@@ -49,7 +49,7 @@ def pytest_configure() -> None:
     django.setup()
 
 
-@pytest.fixture()
+@pytest.fixture
 def admin_client(client):
     from django.contrib.auth.models import User
 
@@ -62,7 +62,7 @@ def admin_client(client):
     return client
 
 
-@pytest.fixture()
+@pytest.fixture
 def user_client(client):
     from django.contrib.auth.models import User
 

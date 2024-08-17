@@ -4,7 +4,7 @@ from rest_framework import status
 from tests.app.models import TestModel, TestModelStatus
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_create_positive(admin_client):
     initial_count = TestModel.objects.count()
     response = admin_client.post(
@@ -19,7 +19,7 @@ def test_create_positive(admin_client):
     assert TestModel.objects.count() == initial_count + 1
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_create_negative(user_client):
     initial_count = TestModel.objects.count()
     response = user_client.post(
@@ -34,7 +34,7 @@ def test_create_negative(user_client):
     assert TestModel.objects.count() == initial_count
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize('method', ['put', 'patch'])
 def test_update_positive(admin_client, method):
     instance = TestModel.objects.create(title='Test')
@@ -54,7 +54,7 @@ def test_update_positive(admin_client, method):
     assert instance.title == method
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize('method', ['put', 'patch'])
 def test_update_negative(user_client, method):
     instance = TestModel.objects.create(title='Test')
@@ -74,7 +74,7 @@ def test_update_negative(user_client, method):
     assert instance.title == 'Test'
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_delete_positive(admin_client):
     instance = TestModel.objects.create(title='Test')
     initial_count = TestModel.objects.count()
@@ -85,7 +85,7 @@ def test_delete_positive(admin_client):
     assert TestModel.objects.count() == initial_count - 1
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_delete_negative(user_client):
     instance = TestModel.objects.create(title='Test')
     initial_count = TestModel.objects.count()
@@ -96,7 +96,7 @@ def test_delete_negative(user_client):
     assert TestModel.objects.count() == initial_count
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize('client_name', ['admin_client', 'user_client'])
 def test_list_positive(request, client_name):
     instance = TestModel.objects.create(title='Test')
@@ -108,7 +108,7 @@ def test_list_positive(request, client_name):
     assert response.json()['results'][0]['title'] == instance.title
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize('client_name', ['admin_client', 'user_client'])
 def test_view_positive(request, client_name):
     instance = TestModel.objects.create(
@@ -122,7 +122,7 @@ def test_view_positive(request, client_name):
     assert response.json()['title'] == instance.title
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_view_negative(user_client):
     instance = TestModel.objects.create(title='Test')
 
@@ -131,7 +131,7 @@ def test_view_negative(user_client):
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_publish_positive(admin_client):
     instance = TestModel.objects.create(title='Test')
 
@@ -140,7 +140,7 @@ def test_publish_positive(admin_client):
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @pytest.mark.parametrize(
     ('client_name', 'instance_status'),
     [
@@ -158,7 +158,7 @@ def test_publish_negative(request, client_name, instance_status):
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_custom_non_detail_positive(admin_client):
     response = admin_client.get(path='/model/custom_non_detail/')
 
@@ -166,14 +166,14 @@ def test_custom_non_detail_positive(admin_client):
     assert response.json() == {'custom_non_detail': True}
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_custom_non_detail_negative(user_client):
     response = user_client.get(path='/model/custom_non_detail/')
 
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_view_without_action_negative(admin_client):
     instance = TestModel.objects.create(title='Test')
 
