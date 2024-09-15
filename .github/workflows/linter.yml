@@ -15,10 +15,10 @@ jobs:
       - name: Ruff check
         uses: chartboost/ruff-action@v1
         with:
-          version: 0.6.1
+          version: 0.6.5
 
       - name: Ruff format
         uses: chartboost/ruff-action@v1
         with:
-          version: 0.6.1
+          version: 0.6.5
           args: 'format --check'
