@@ -4,7 +4,7 @@ help: ## Help
 
 .DEFAULT_GOAL := help
 PROJECT_NAME = '$(shell basename $(CURDIR)):dev'
-DOCKER_CMD = docker run --rm -it -v "$(CURDIR):/code" $(PROJECT_NAME) /bin/bash
+DOCKER_CMD = docker run --rm -it -v "$(CURDIR):/app" -v /opt/venv $(PROJECT_NAME) /bin/bash
 
 .PHONY: build
 build: ## Build
