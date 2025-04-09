@@ -1,6 +1,6 @@
-FROM python:3.12.6-slim
+FROM python:3.13.3-slim
 
-COPY --from=ghcr.io/astral-sh/uv:0.4.10 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.6.13 /uv /bin/uv
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONDONTWRITEBYTECODE=1 \

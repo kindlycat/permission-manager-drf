@@ -5,9 +5,9 @@ from .permissions import ManagerPermission
 
 
 __all__ = [
+    'DRFPermissionManager',
+    'ManagerPermission',
     'PermissionField',
     'PermissionFieldChild',
-    'ManagerPermission',
-    'DRFPermissionManager',
     'PermissionManagerPaginationMixin',
 ]
