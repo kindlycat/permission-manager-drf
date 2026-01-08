@@ -1,10 +1,9 @@
 import django
 import pytest
+from django.conf import settings
 
 
 def pytest_configure() -> None:
-    from django.conf import settings
-
     settings.configure(
         DATABASES={
             'default': {
@@ -51,7 +50,7 @@ def pytest_configure() -> None:
 
 @pytest.fixture
 def admin_client(client):
-    from django.contrib.auth.models import User
+    from django.contrib.auth.models import User  # noqa: PLC0415
 
     user = User.objects.create_user(
         username='admin',
@@ -64,7 +63,7 @@ def admin_client(client):
 
 @pytest.fixture
 def user_client(client):
-    from django.contrib.auth.models import User
+    from django.contrib.auth.models import User  # noqa: PLC0415
 
     user = User.objects.create_user(
         username='user',
