@@ -167,8 +167,8 @@ def test_get_permission_manager_multiple_attributes(attributes, expected_key):
     for k, v in attributes.items():
         match k:
             case 'get_permission_manager' if v:
-                View.get_permission_manager = partial(
-                    lambda _, value: value, value=v
+                View.get_permission_manager = staticmethod(
+                    partial(lambda value: value, value=v)
                 )
             case 'permission_manager' if v:
                 View.permission_manager = v
