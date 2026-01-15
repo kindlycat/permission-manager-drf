@@ -1,6 +1,6 @@
 [project]
 name = "permission-manager-drf"
-version = "1.0.0"
+version = "1.0.1"
 description = "A simple way to manage object permissions in drf."
 authors = [
     {name = "Grigory Mishchenko", email = "grishkokot@gmail.com"},
@@ -8,7 +8,6 @@ authors = [
 license = "MIT"
 readme = "README.md"
 keywords = ["permissions", "drf", "rest framework"]
-repository = "https://github.com/kindlycat/permission-manager-drf"
 requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -22,6 +21,12 @@ dependencies = [
     "djangorestframework>=3.14.0",
     "permission-manager>=0.6.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/kindlycat/permission-manager-drf"
+Documentation = "https://permission-manager-drf.readthedocs.io"
+Repository = "https://github.com/kindlycat/permission-manager-drf.git"
+Issues = "https://github.com/kindlycat/permission-manager-drf/issues"
 
 [dependency-groups]
 dev = [
